@@ -16,7 +16,7 @@ def login(username, password, domain, lmhash, nthash, aesKey, dc_ip):
         kerb_principal = Principal(username, type=constants.PrincipalNameType.NT_PRINCIPAL.value)
         getKerberosTGT(kerb_principal, password, domain,
             unhexlify(lmhash), unhexlify(nthash), aesKey, dc_ip)
-        print(' [+]Success %s/%s' % (domain, username) )
+        print('[+] Success %s/%s' % (domain, username) )
         return "success"
     except KerberosError as e:
         if (e.getErrorCode() == constants.ErrorCodes.KDC_ERR_C_PRINCIPAL_UNKNOWN.value) or (e.getErrorCode() == constants.ErrorCodes.KDC_ERR_CLIENT_REVOKED.value) or (e.getErrorCode() == constants.ErrorCodes.KDC_ERR_WRONG_REALM.value):
@@ -26,7 +26,7 @@ def login(username, password, domain, lmhash, nthash, aesKey, dc_ip):
         else:
             print(e)
     except socket.error as e:
-        print('[-]Could not connect to DC')
+        print('[-] Could not connect to DC')
         return
 
 if len(sys.argv) < 4:
